@@ -14,6 +14,20 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     />
+    <style>
+      /* Tumma tila - tyylit */
+      body.dark-mode {
+          background-color: #121212;
+          color: white;
+      }
+      .navbar.dark-mode {
+          background-color: #222 !important;
+      }
+      .card.dark-mode {
+          background-color: #333;
+          color: white;
+      }
+  </style>
   </head>
 
   <body>
@@ -22,6 +36,10 @@
         <a class="navbar-brand" href="index.html"
           ><i class="fas fa-home"></i
         ></a>
+        <div class="form-check form-switch ms-auto">
+          <input class="form-check-input" type="checkbox" id="darkModeToggle">
+          <label class="form-check-label" for="darkModeToggle">🌙 Tumma tila</label>
+        </div>
         <!--Mobiilin käyttöliittymän parannus-->
         <button
         class="navbar-toggler"
@@ -53,6 +71,35 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+        <!-- Tumma tila - JavaScript -->
+        <script>
+          document.addEventListener("DOMContentLoaded", function () {
+              const toggle = document.getElementById("darkModeToggle");
+              const body = document.body;
+              const navbar = document.querySelector(".navbar");
+  
+              // Tarkistetaan onko tumma tila käytössä localStoragessa
+              if (localStorage.getItem("dark-mode") === "enabled") {
+                  body.classList.add("dark-mode");
+                  navbar.classList.add("dark-mode");
+                  toggle.checked = true;
+              }
+  
+              // Tumma tila -kytkimen toiminnallisuus
+              toggle.addEventListener("change", function () {
+                  if (toggle.checked) {
+                      body.classList.add("dark-mode");
+                      navbar.classList.add("dark-mode");
+                      localStorage.setItem("dark-mode", "enabled");
+                  } else {
+                      body.classList.remove("dark-mode");
+                      navbar.classList.remove("dark-mode");
+                      localStorage.setItem("dark-mode", "disabled");
+                  }
+              });
+          });
+      </script>
     <footer class="text-center mt-5">
       <p>
         &copy; 2025 Puhelinluettelo.
